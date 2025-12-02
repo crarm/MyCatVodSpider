@@ -42,7 +42,7 @@ public class Jable extends Spider {
         }
         doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
         for (Element element : doc.select("div.video-img-box")) {
-            String pic = element.select("img").attr("data-src");
+            String pic = element.select("img").attr("src");
             String url = element.select("a").attr("href");
             String name = element.select("div.detail > h6").text();
             if (pic.endsWith(".gif") || name.isEmpty()) continue;
