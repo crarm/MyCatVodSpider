@@ -61,7 +61,7 @@ public class Jable extends Spider {
         for (Element element : doc.select("div.video-img-box")) {
             String pic = element.select("img").attr("src");
             String url = element.select("a").attr("href");
-            String name = element.select(""h6.title").text();
+            String name = element.select("h6.title").text();
             String id = url.split("/")[4];
             list.add(new Vod(id, name, pic));
         }
