@@ -21,7 +21,7 @@ jobs:
     - name: Grant execute permission to gradlew
       run: |
         chmod +x ./gradlew
-        cp -rf ./app/src/main/java/com/github/catvod/spider/Jable.java ./Myspider/
+        cp -rf ./Myspider/* ./app/src/main/java/com/github/catvod/spider/
       
 
     - name: Build with Gradle
