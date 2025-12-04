@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Jable extends Spider {
+public class JavBus extends Spider {
 
     private static final String siteUrl = "https://javbus.sbs";
     private static final String cateUrl = siteUrl + "/vod/type/id/";
