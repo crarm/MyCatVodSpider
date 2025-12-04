@@ -63,6 +63,7 @@ public class JavBus extends Spider {
 				String pic = element.select("a.myui-vodlist__thumb").attr("data-original");
 				String url = element.select("a.myui-vodlist__thumb").attr("href");
 				String name = element.select("a.myui-vodlist__thumb").attr("title");
+				if (pic.endsWith(".gif") || name.isEmpty()) continue;
 				String id = url.split("/")[4];
 				list.add(new Vod(id, name, pic));
 			}			
@@ -73,11 +74,14 @@ public class JavBus extends Spider {
 				String pic = element.select("a.myui-vodlist__thumb").attr("data-original");
 				String url = element.select("a.myui-vodlist__thumb").attr("href");
 				String name = element.select("a.myui-vodlist__thumb").attr("title");
+				if (pic.endsWith(".gif") || name.isEmpty()) continue;
 				String id = url.split("/")[4];
 				list.add(new Vod(id, name, pic));
 			}
 		}
-        return Result.string(list);
+		Integer total = (Integer.parseInt(pg) + 1) * 12;
+        return Result.string(Integer.parseInt(pg), Integer.parseInt(pg) + 1, 12, total, list);
+        //return Result.string(list);
     }
 
     @Override
