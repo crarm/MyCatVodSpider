@@ -23,7 +23,7 @@ public class JavBus extends Spider {
 
     private static final String siteUrl = "https://javbus.sbs";
     private static final String cateUrl = siteUrl + "/vod/type/id/";
-    private static final String detailUrl = siteUrl + "vod/detail/id/";
+    private static final String detailUrl = siteUrl + "/vod/detail/id/";
     private static final String searchUrl = siteUrl + "/search/";
 
     private HashMap<String, String> getHeaders() {
