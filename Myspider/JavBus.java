@@ -59,6 +59,7 @@ public class JavBus extends Spider {
 		if (tid == "all"){
 			String target = siteUrl + "/vod/show/id/all/page/" + Integer.parseInt(pg)+ "/";
 			Document doc = Jsoup.parse(OkHttp.string(target, getHeaders()));
+			doc = doc.select("ul.myui-vodlist.clearfix");
 			for (Element element : doc.select("div.myui-vodlist__box")) {
 				String pic = element.select("a.myui-vodlist__thumb").attr("data-original");
 				String url = element.select("a.myui-vodlist__thumb").attr("href");
@@ -79,9 +80,7 @@ public class JavBus extends Spider {
 				list.add(new Vod(id, name, pic));
 			}
 		}
-		Integer total = (Integer.parseInt(pg) + 1) * 12;
-        return Result.string(Integer.parseInt(pg), Integer.parseInt(pg) + 1, 12, total, list);
-        //return Result.string(list);
+        return Result.string(list);
     }
 
     @Override
