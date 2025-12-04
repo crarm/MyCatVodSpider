@@ -36,18 +36,16 @@ public class JavBus extends Spider {
     public String homeContent(boolean filter) throws Exception {
         List<Vod> list = new ArrayList<>();
         List<Class> classes = new ArrayList<>();
-        Document doc = Jsoup.parse(OkHttp.string(cateUrl, getHeaders()));
-        Document doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
         String[] typeIdList = {"1","2","3","4","5","6","7","all"};
         String[] typeNameList = {"中字一区","中字二区","中字三区","中字四区","中字五区","传媒映画","日本AV","全部"};
         for (int i = 0; i < typeNameList.length; i++) {
             classes.add(new Class(typeIdList[i], typeNameList[i]));
         }
-        doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
-        for (Element element : doc.select("div.video-img-box")) {
-            String pic = element.select("img").attr("data-src");
-            String url = element.select("a").attr("href");
-            String name = element.select("div.detail > h6").text();
+        Document doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
+        for (Element element : doc.select("div.myui-vodlist__box")) {
+            String pic = element.select("a.myui-vodlist__thumb").attr("data-original");
+            String url = element.select("a.myui-vodlist__thumb").attr("href");
+            String name = element.select("a.myui-vodlist__thumb").attr("title");
             if (pic.endsWith(".gif") || name.isEmpty()) continue;
             String id = url.split("/")[4];
             list.add(new Vod(id, name, pic));
