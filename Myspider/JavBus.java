@@ -93,7 +93,7 @@ public class JavBus extends Spider {
         Matcher matcher = regex.matcher(text);
 		String urlall = "";
         while(matcher.find()) {
-            urlall.concat(matcher.group(1),"#");
+            urlall.concat(matcher.group(1)).concat("#");
         }
         url = urlall.substring(0, str.length() - 1);
         Vod vod = new Vod();
