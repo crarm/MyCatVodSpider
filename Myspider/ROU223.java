@@ -18,7 +18,7 @@ import java.util.List;
 public class ROU223 extends Spider {
 
     private static final String siteUrl = "http://223rou.com";
-    private static final String searchUrl = siteUrl + "/index.php/vod/search.html?wd=";
+    private static final String searchUrl = siteUrl + "/search.html?q=";
 
     private HashMap<String, String> getHeaders() {
         HashMap<String, String> headers = new HashMap<>();
@@ -104,13 +104,13 @@ public class ROU223 extends Spider {
     public String searchContent(String key, boolean quick) throws Exception {
         List<Vod> list = new ArrayList<>();
         Document doc = Jsoup.parse(OkHttp.string(searchUrl.concat(key), getHeaders()));
-        for (Element element : doc.select("div.row.col5.clearfix dt a")) {
+        for (Element element : doc.select("li.sui-result")) {
             try {
-                String pic = element.select("img").attr("data-original");
-                String url = element.attr("href");
-                String name = element.attr("title");
-                String id = url;
-                list.add(new Vod(id, name, siteUrl + pic));
+                String pic = element.select("img").attr("src");
+                String url = element.select("div.sui-result__image > a").attr("href");
+                String name = element.select("div.sui-result__image > a").attr("title").replace("<em>","").replace("</em>,"");
+                String id = url.replace(siteUrl,"");
+                list.add(new Vod(id, name,pic));
             } catch (Exception e) {
             }
         }
