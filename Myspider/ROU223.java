@@ -41,7 +41,7 @@ public class ROU223 extends Spider {
             count ++;
         }
         doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
-        for (Element element : doc.select("ul.row.col5.clearfix li")) {
+        for (Element element : doc.select("ul.row.col5.clearfix > li")) {
             try {
                 String pic = element.select("img").attr("data-original");
                 String url = element.select("a").attr("href");
@@ -63,10 +63,10 @@ public class ROU223 extends Spider {
         if (pg == "1") {
             target = siteUrl + tid + "index.html";
             doc = Jsoup.parse(OkHttp.string(target, getHeaders()));
-            String nextpg = doc.select("div.pagination > span > a").first().attr("href").replace("/","").replace(tid,"").replace("list_","").replace(".html","");
+            String nextpg = doc.select("div.pagination > span > a").first().attr("href").replace(tid,"").replace("list_","").replace(".html","");
             totlepg = 1 + Integer.parseInt(nextpg);
         } else {
-            String nextpg = String.valueOf( totlepg - Integer.parseInt(pg));
+            String nextpg = String.valueOf( totlepg - Integer.parseInt(pg) + 1);
             target = siteUrl + tid + "list_" + nextpg + ".html";
             doc = Jsoup.parse(OkHttp.string(target, getHeaders()));
         }
