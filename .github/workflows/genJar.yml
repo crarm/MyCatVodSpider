@@ -22,7 +22,8 @@ jobs:
       run: |
         chmod +x ./gradlew
         cp -rf ./Myspider/*.java ./app/src/main/java/com/github/catvod/spider/
-        #rm -rf ./app/src/main/java/com/github/catvod/spider/NiNi.java
+        rm -rf ./app/src/main/java/com/github/catvod/spider/miss.java
+        rm -rf ./app/src/main/java/com/github/catvod/spider/miss.java
       
 
     - name: Build with Gradle
