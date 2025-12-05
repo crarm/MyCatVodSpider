@@ -41,11 +41,11 @@ public class ROU223 extends Spider {
             count ++;
         }
         doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
-        for (Element element : doc.select("div.row.col5.clearfix dt a")) {
+        for (Element element : doc.select("ul.row.col5.clearfix li")) {
             try {
                 String pic = element.select("img").attr("data-original");
-                String url = element.attr("href");
-                String name = element.attr("title");
+                String url = element.select("a").attr("href");
+                String name = element.select("a").attr("title");
                 String id = url;
                 list.add(new Vod(id, name,siteUrl + pic));
             } catch (Exception e) {
@@ -80,8 +80,7 @@ public class ROU223 extends Spider {
             }
         }
 
-        Integer total = (Integer.parseInt(pg) + 1) * 20;
-        return Result.string(Integer.parseInt(pg), Integer.parseInt(pg) + 1, 20, total, list);
+        return Result.string(list);
     }
 
     @Override
