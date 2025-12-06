@@ -19,11 +19,11 @@ import java.util.List;
 public class Eighteen extends Spider {
 
     private final String url = "https://mjv002.com/zh/";
-    pribate final String starturl = "https://mjv002.com/zh/chinese_IamOverEighteenYearsOld/19/index.html";
+    private final String starturl = "https://mjv002.com/zh/chinese_IamOverEighteenYearsOld/19/index.html";
 
     @Override
     public void init(Context context, String extend) throws Exception {
-        OkHttp.newCall(starturl)close();
+        OkHttp.newCall(starturl).close();
     }
 
     @Override
