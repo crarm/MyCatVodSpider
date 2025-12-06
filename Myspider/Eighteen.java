@@ -46,7 +46,7 @@ public class Eighteen extends Spider {
     @Override
     public void init(Context context, String extend) throws Exception {
 		
-		List<String> setCookieHeaders = OkHttp.string(starturl,getHeaders()).headers("Set-Cookie");
+		List<String> setCookieHeaders = OkHttp.newCall(starturl,getHeaders()).headers("Set-Cookie");
 		for (String header : setCookieHeaders) {
             try {
                 // 解析 Cookie：name=value; expires=...; path=...; domain=...
@@ -136,7 +136,7 @@ public class Eighteen extends Spider {
         params.put("search_keyword", key);
         params.put("search_type", "fc");
         params.put("op", "search");
-        String res = OkHttp.post(url + "searchform_search/all/" + pg + ".html", params,getHeaders());
+        String res = OkHttp.post(url + "searchform_search/all/" + pg + ".html", params); 
         List<Vod> list = new ArrayList<>();
         for (Element div : Jsoup.parse(res).select("div.post")) {
             String id = div.select("a").attr("href").replace(url, "");
