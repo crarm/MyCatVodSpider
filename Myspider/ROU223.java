@@ -102,9 +102,9 @@ private int fetchTotalPages(String tid) {
         Document doc = Jsoup.parse(OkHttp.string(firstPageUrl, getHeaders()));
         
         // 方法1：通过分页链接获取最后一页的页码
-        Element paginationLinks = doc.select("div.pagination > span > a");
+        Elements paginationLinks = doc.select("div.pagination > span > a");
         if (!paginationLinks.isEmpty()) {
-            Elements lastPageLink = paginationLinks.first();
+            Element lastPageLink = paginationLinks.first();
             String href = lastPageLink.attr("href");
             
             // 提取页码数字
