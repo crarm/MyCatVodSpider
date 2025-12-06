@@ -53,7 +53,7 @@ public class Cg51 extends Spider {
             classes.add(new Class(typeIdList[i], typeNameList[i]));
         }
         Document doc = Jsoup.parse(OkHttp.string(siteUrl, getHeaders()));
-        List<Vod> list;
+        List<Vod> list = new ArrayList<>() ;
         for (Element element : doc.select("article")) {
             if( element.select("a").attr("onclick").isEmpty() ){
 				String pic = element.select("div.blog-background").attr("style").replace("background-image: url(\"","").replace("\");","");
@@ -70,7 +70,7 @@ public class Cg51 extends Spider {
     public String categoryContent(String tid, String pg, boolean filter, HashMap<String, String> extend) throws Exception {
         String target = cateUrl + tid + "/" + pg + "/"; 
         Document doc = Jsoup.parse(OkHttp.string(target, getHeaders()));
-        List<Vod> list;
+        List<Vod> list  = new ArrayList<>();
         for (Element element : doc.select("article")) {
             if( element.select("a").attr("onclick").isEmpty() ){
 				String pic = element.select("div.blog-background").attr("style").replace("background-image: url(\"","").replace("\");","");
