@@ -19,11 +19,11 @@ import java.util.List;
 public class Eighteen extends Spider {
 
     private final String url = "https://mjv002.com/zh/";
-    private final String starturl = "https://mjv002.com/zh/chinese_IamOverEighteenYearsOld/19/index.html";
+    pribate final String starturl = "https://mjv002.com/zh/chinese_IamOverEighteenYearsOld/19/index.html";
 
     @Override
     public void init(Context context, String extend) throws Exception {
-        OkHttp.newCall(starturl).close();
+        OkHttp.newCall(starturl)close();
     }
 
     @Override
@@ -31,9 +31,9 @@ public class Eighteen extends Spider {
         List<Class> classes = new ArrayList<>();
         List<Vod> list = new ArrayList<>();
         Document doc = Jsoup.parse(OkHttp.string(starturl));
-        for (Element a : doc.select("li.animenu__nav_transparent")) {
-            String typeName = a.select("a").text();
-            String typeId = a.select("a").attr("href").replace(url, "");
+        for (Element a : doc.select("li.animenu__nav_transparent > a")) {
+            String typeName = a.text();
+            String typeId = a.attr("href").replace(url, "");
             if (!typeId.contains("random/all/")) continue;
             if (typeName.contains("18H")) break;
             classes.add(new Class(typeId, typeName));
